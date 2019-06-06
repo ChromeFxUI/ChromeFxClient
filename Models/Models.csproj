@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{575135DF-984C-4EB5-B620-51E19B4D8BF4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Models</RootNamespace>
+    <AssemblyName>Models</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CreateProjectPageState.cs">
+      <Generator>DtsGenerator</Generator>
+      <LastGenOutput>CreateProjectPageState.cs.d.ts</LastGenOutput>
+    </Compile>
+    <Compile Include="PluginPageState.cs">
+      <Generator>DtsGenerator</Generator>
+      <LastGenOutput>PluginPageState.cs.d.ts</LastGenOutput>
+    </Compile>
+    <Compile Include="SetProjectPathPageState.cs">
+      <Generator>DtsGenerator</Generator>
+      <LastGenOutput>SetProjectPathPageState.cs.d.ts</LastGenOutput>
+    </Compile>
+    <Compile Include="Store.cs" />
+    <Compile Include="UploadPageState.cs">
+      <Generator>DtsGenerator</Generator>
+      <LastGenOutput>UploadPageState.cs.d.ts</LastGenOutput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Redux\ReduxCore\ReduxCore.csproj">
+      <Project>{0ae46835-b2ae-4913-a98f-b68b7b3234f3}</Project>
+      <Name>ReduxCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="CreateProjectPageState.cs.d.ts">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateProjectPageState.cs</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="PluginPageState.cs.d.ts">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PluginPageState.cs</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="SetProjectPathPageState.cs.d.ts">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SetProjectPathPageState.cs</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="UploadPageState.cs.d.ts">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UploadPageState.cs</DependentUpon>
+    </TypeScriptCompile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
