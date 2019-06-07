@@ -1,4 +1,5 @@
 ﻿using Actions.CreateProjectPageActions;
+using ChromFXUI;
 using Chromium.WebBrowser;
 using Models;
 using Newtonsoft.Json;
@@ -13,7 +14,7 @@ namespace GlobalExtensions
 {
     public static class CreateProjectPageExtension
     {
-        public static void UseCreateProjectPage(this JSObject chromfx, Package<Store> store)
+        public static void UseCreateProjectPage(this JSObject chromfx, Package<Store> store, ChromFXBaseForm chromFXBaseForm)
         {
             var pluginPageActions = chromfx.AddObject("createProjectActions");
             pluginPageActions.AddFunction("startProcess").Execute += (func, args) =>
@@ -28,9 +29,12 @@ namespace GlobalExtensions
                     {
                         ModelProcess = ele,
                         SetProjectPathPageState = state.SetProjectPathPageState,
-                        RefreshState = (createProjectPageState,message) =>
+                        RefreshState = (model) =>
                         {
-                            store.Dispatch(new RefreshState() { CreateProjectPageState = createProjectPageState});
+                            var curValue = JsonConvert.SerializeObject(model);
+                            string cmd = string.Format("createProjectActions.refreshUpload(\"{0}\",{1})", model.Id,model.Percent);
+
+                            chromFXBaseForm.ExecuteJavascript(cmd);
                         },
                         ShowMessage = (m) =>
                         {

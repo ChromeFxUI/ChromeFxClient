@@ -19,14 +19,14 @@ namespace ChromeFxClient
     public partial class MainForm : ReduxStyleForm<Store>
     {
         public MainForm(Package<Store> store):
-            base(store, "http://10.1.30.241:8080/")
+            base(store, "http://localhost:8080/")
         {
             InitializeComponent();
 
             this.GlobalObject.UsePluginPage(store);
             this.GlobalObject.UseUploadPage(store);
             this.GlobalObject.UseSetProjectPathPage(store);
-            this.GlobalObject.UseCreateProjectPage(store);
+            this.GlobalObject.UseCreateProjectPage(store,this);
             //store.UseNoticeMiddleware();
 
             this.ConfigureHttpClientContiner(new Uri($"http://{ConfigurationManager.AppSettings.Get("RemoteServerIp")}:{ConfigurationManager.AppSettings.Get("RemoteServerPort")}"));

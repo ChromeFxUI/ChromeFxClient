@@ -20,7 +20,7 @@ namespace Actions.CreateProjectPageActions
             set; get;
         }
 
-        public Action<CreateProjectPageState, Message> RefreshState;
+        public Action<ModelProcess> RefreshState;
         public Action<Message> ShowMessage;
     }
     public class LoadMoudels

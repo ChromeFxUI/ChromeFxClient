@@ -26,7 +26,7 @@ namespace Reducers
                 
                 Task.Factory.StartNew(() =>
                 {
-                    refreshState(action.RefreshState, state);
+                    refreshState(action.RefreshState, curModel);
                     WebClient client = new WebClient();
                     var url = "";
                     if (action.ModelProcess.IsTemplateProject)
@@ -68,7 +68,7 @@ namespace Reducers
                         }
                     }
 
-                    DownloadFileWithResume(url, filePath,action.ModelProcess,action.RefreshState, state,action.ShowMessage);
+                    DownloadFileWithResume(url, filePath,action.ModelProcess,action.RefreshState,action.ShowMessage);
 
                 });
 
@@ -87,6 +87,10 @@ namespace Reducers
             Process<LoadMoudels>((state, action) =>
             {
                 state.Message.Msg = "请点击生成按钮开始生成项目！";
+                if(state.Models == null)
+                {
+                    state.Models = new List<ModelProcess>();
+                }
                 foreach(var item in state.Models)
                 {
                     item.StepName = "";
@@ -111,11 +115,11 @@ namespace Reducers
             }); 
         }
 
-        public void refreshState(Action<CreateProjectPageState, Message> refresh, CreateProjectPageState createProjectPageState)
+        public void refreshState(Action<ModelProcess> refresh, ModelProcess modelProcess)
         {
             if (refresh != null)
             {
-                refresh.Invoke(createProjectPageState,createProjectPageState.Message);
+                refresh.Invoke(modelProcess);
             }
         }
 
@@ -124,7 +128,7 @@ namespace Reducers
         /// </summary>
         /// <param name="sourceUrl"></param>
         /// <param name="destinationPath"></param>
-        private void DownloadFileWithResume(string sourceUrl, string destinationPath, ModelProcess curModelProcess, Action<CreateProjectPageState, Message> refresh, CreateProjectPageState state,Action<Message> showMessage)
+        private void DownloadFileWithResume(string sourceUrl, string destinationPath, ModelProcess curModelProcess, Action<ModelProcess> refresh,Action<Message> showMessage)
         {
             try
             {
@@ -182,15 +186,15 @@ namespace Reducers
                                 saveFileStream.Close();
                                 saveFileStream.Dispose();
 
-                                state.Models.FirstOrDefault(p => p.Id == curModelProcess.Id).Percent = 100;
-                                refreshState(refresh, state);
+                                curModelProcess.Percent = 100;
+                                refreshState(refresh, curModelProcess);
                             }
                             int oldValue = curModelProcess.Percent;
-                            var curPer = (readTotalSize / (float)httpWebResponse.ContentLength) * 100;
+                            var curPer = (int)((readTotalSize / (float)httpWebResponse.ContentLength) * 100);
                             if (curPer > (oldValue + 1))
                             {
-                                state.Models.FirstOrDefault(p => p.Id == curModelProcess.Id).Percent = ((int)curPer);
-                                refreshState(refresh, state);
+                                curModelProcess.Percent = ((int)curPer);
+                                refreshState(refresh, curModelProcess);
                             }
 
                            

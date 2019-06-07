@@ -1,0 +1,15 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/Actions/bin/Debug
+/Actions/obj/Debug
+/ChromeFxClient
+/GlobalExtensions/bin/Debug
+/GlobalExtensions/obj/Debug
+/Models/bin/Debug
+/Reducers/bin/Debug
+/Reducers/obj/Debug
+/ResumeHttpClient/bin/Debug/netstandard2.0
+/ResumeHttpClient/obj
+/Models/obj/Debug
